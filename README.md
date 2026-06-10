@@ -2,7 +2,7 @@
 
 <img src="media/icon.png" width="128" height="128" alt="Claudometer icon"/>
 
-# Claudometer
+# [Claudometer](https://marketplace.visualstudio.com/items?itemName=OmkarPatel.claudometer&ssr=false#overview)
 
 **Track what Claude Code actually costs you — directly in VS Code.**
 
