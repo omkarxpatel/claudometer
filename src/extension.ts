@@ -31,6 +31,40 @@ export function activate(context: vscode.ExtensionContext): void {
   );
 
   store.start();
+  trackVersion(context);
+}
+
+const VERSION_KEY = 'claudometer.lastVersion';
+
+/**
+ * First install → surface the getting-started walkthrough once.
+ * Update → one "what's new" toast linking to the bundled changelog.
+ */
+function trackVersion(context: vscode.ExtensionContext): void {
+  const current: string = context.extension.packageJSON.version;
+  const previous = context.globalState.get<string>(VERSION_KEY);
+  if (previous === current) return;
+  void context.globalState.update(VERSION_KEY, current);
+
+  if (!previous) {
+    void vscode.commands.executeCommand(
+      'workbench.action.openWalkthrough',
+      `${context.extension.id}#claudometer.gettingStarted`,
+      false
+    );
+    return;
+  }
+
+  void vscode.window
+    .showInformationMessage(`Claudometer updated to v${current}.`, "What's New")
+    .then((choice) => {
+      if (choice) {
+        void vscode.commands.executeCommand(
+          'markdown.showPreview',
+          vscode.Uri.joinPath(context.extensionUri, 'CHANGELOG.md')
+        );
+      }
+    });
 }
 
 async function exportData(store: UsageStore): Promise<void> {

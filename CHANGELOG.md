@@ -7,7 +7,8 @@
 - Long-horizon trends: the Month chart view now reaches back to first recorded usage (up to 36 months)
 - Ledger import: merge a JSON export from another machine (`Claudometer: Import Usage Data…`)
 - Configurable ledger location (`claudometer.ledgerPath`) — point at a synced folder for backup
-- Getting-started walkthrough for first-run onboarding
+- Getting-started walkthrough for first-run onboarding (opens automatically on first install)
+- "What's new" notification after extension updates, linking to this changelog
 
 - Durable usage ledger: daily aggregates survive Claude Code's transcript cleanup
 - CSV/JSON export from the ledger (`Claudometer: Export Usage Data…`)
