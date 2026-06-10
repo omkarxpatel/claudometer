@@ -1,0 +1,16 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Claudometer icon: a usage gauge in Claude terracotta -->
+  <rect width="512" height="512" rx="112" fill="#221F1E"/>
+  <!-- gauge track -->
+  <path d="M 106 316 A 150 150 0 0 1 406 316"
+        stroke="#3B342F" stroke-width="54" fill="none" stroke-linecap="round"/>
+  <!-- gauge value (~72%) -->
+  <path d="M 106 316 A 150 150 0 0 1 352.4 201.1"
+        stroke="#D97757" stroke-width="54" fill="none" stroke-linecap="round"/>
+  <!-- needle -->
+  <line x1="256" y1="316" x2="331.9" y2="225.6"
+        stroke="#F2EAE2" stroke-width="16" stroke-linecap="round"/>
+  <!-- hub -->
+  <circle cx="256" cy="316" r="23" fill="#F2EAE2"/>
+  <circle cx="256" cy="316" r="9" fill="#221F1E"/>
+</svg>

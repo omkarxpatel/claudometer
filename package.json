@@ -1,0 +1,218 @@
+{
+  "name": "claudometer",
+  "displayName": "Claudometer — Claude Code Usage Tracker",
+  "description": "Local-first Claude Code usage tracking: cost, tokens, and live quota in your status bar and dashboard. No API keys, no accounts, no telemetry.",
+  "version": "0.1.0",
+  "publisher": "omkar-patel",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/omkar-patel/claudometer.git"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#221F1E",
+    "theme": "dark"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "keywords": [
+    "claude",
+    "claude-code",
+    "anthropic",
+    "usage",
+    "cost",
+    "tokens",
+    "quota"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true,
+      "description": "Claudometer never reads workspace files. It only reads Claude Code's local data in your home directory."
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "claudometer.openDashboard",
+        "title": "Claudometer: Open Dashboard",
+        "icon": "$(graph)"
+      },
+      {
+        "command": "claudometer.refresh",
+        "title": "Claudometer: Refresh Usage Data"
+      },
+      {
+        "command": "claudometer.openSettings",
+        "title": "Claudometer: Open Settings",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "claudometer.exportData",
+        "title": "Claudometer: Export Usage Data…"
+      },
+      {
+        "command": "claudometer.importData",
+        "title": "Claudometer: Import Usage Data…"
+      }
+    ],
+    "walkthroughs": [
+      {
+        "id": "claudometer.gettingStarted",
+        "title": "Get started with Claudometer",
+        "description": "Local-first Claude Code usage tracking — no API keys, no accounts, no telemetry.",
+        "steps": [
+          {
+            "id": "openDashboard",
+            "title": "Open the dashboard",
+            "description": "Spend, live quota, activity charts, a contribution calendar, and per-project drill-downs — all from data already on your machine.\n[Open Dashboard](command:claudometer.openDashboard)",
+            "media": { "markdown": "media/walkthrough/dashboard.md" },
+            "completionEvents": ["onCommand:claudometer.openDashboard"]
+          },
+          {
+            "id": "quota",
+            "title": "Watch your quota",
+            "description": "The status bar shows your 5-hour and weekly limits live, forecasts when you'll max out, and can notify you when a window resets.",
+            "media": { "markdown": "media/walkthrough/quota.md" }
+          },
+          {
+            "id": "budget",
+            "title": "Set a budget (optional)",
+            "description": "A monthly budget adds a progress bar and alerts at 80% and 100%.\n[Open Claudometer Settings](command:claudometer.openSettings)",
+            "media": { "markdown": "media/walkthrough/budget.md" },
+            "completionEvents": ["onCommand:claudometer.openSettings"]
+          },
+          {
+            "id": "privacy",
+            "title": "Your data stays local",
+            "description": "Everything is read from your machine and stays there. A durable ledger preserves history even after Claude Code prunes old transcripts — export it any time.\n[Export Usage Data](command:claudometer.exportData)",
+            "media": { "markdown": "media/walkthrough/privacy.md" }
+          }
+        ]
+      }
+    ],
+    "configuration": {
+      "title": "Claudometer",
+      "properties": {
+        "claudometer.quota.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show live 5-hour/weekly quota from Anthropic rate-limit headers, using your existing Claude Code sign-in. Makes a minimal (~1 token) request to api.anthropic.com. Disable for fully offline operation — cost tracking still works."
+        },
+        "claudometer.pricing.autoUpdate": {
+          "type": "boolean",
+          "default": true,
+          "description": "Refresh per-model pricing daily from the public models.dev catalog, so new Claude models are priced correctly without an extension update. No data about you is sent. Disable to use only the bundled pricing table (no network)."
+        },
+        "claudometer.pricing.overrides": {
+          "type": "object",
+          "default": {},
+          "markdownDescription": "Per-model pricing overrides in **USD per million tokens**. Keys are model id prefixes (e.g. `claude-fable-5`); values may set any of `input`, `output`, `cacheRead`, `cacheWrite5m`, `cacheWrite1h`. Overrides take precedence over fetched and bundled pricing. Easiest to edit via **Claudometer: Open Settings**.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "input": { "type": "number", "minimum": 0 },
+              "output": { "type": "number", "minimum": 0 },
+              "cacheRead": { "type": "number", "minimum": 0 },
+              "cacheWrite5m": { "type": "number", "minimum": 0 },
+              "cacheWrite1h": { "type": "number", "minimum": 0 }
+            },
+            "additionalProperties": false
+          }
+        },
+        "claudometer.statusBar.showCost": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show today's cost in the status bar."
+        },
+        "claudometer.statusBar.show5hQuota": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the 5-hour session quota percentage in the status bar."
+        },
+        "claudometer.statusBar.show7dQuota": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the weekly quota percentage in the status bar."
+        },
+        "claudometer.statusBar.showResetCountdown": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show the 5-hour window reset countdown in the status bar."
+        },
+        "claudometer.statusBar.showWorkspaceCost": {
+          "type": "boolean",
+          "default": false,
+          "description": "Also show today's cost for the projects open in this window (always visible in the tooltip)."
+        },
+        "claudometer.statusBar.showSessionCost": {
+          "type": "boolean",
+          "default": false,
+          "description": "Also show the running cost of the active conversation (always visible in the tooltip)."
+        },
+        "claudometer.ledgerPath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Where the durable usage ledger is stored. Empty = VS Code extension storage. Point at a synced folder (e.g. `~/Library/Mobile Documents/...` or Dropbox) for backup and multi-machine continuity; data at the new location is merged, never overwritten."
+        },
+        "claudometer.appearance.accentColor": {
+          "type": "string",
+          "default": "#D97757",
+          "description": "Accent color used in the Claudometer dashboard and settings page."
+        },
+        "claudometer.budget.monthly": {
+          "type": "number",
+          "minimum": 0,
+          "default": 0,
+          "description": "Monthly budget in USD (API-equivalent cost). Shows a progress bar on the This Month card and triggers alerts at 80% and 100%. 0 disables."
+        },
+        "claudometer.alerts.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show a notification when quota crosses 80%/95% (with an optional reminder at reset) or the monthly budget crosses 80%/100%."
+        },
+        "claudometer.stats.streakExcludesWeekends": {
+          "type": "boolean",
+          "default": false,
+          "description": "Weekends neither count toward nor break the usage streak."
+        },
+        "claudometer.dashboard.weekMetric": {
+          "type": "string",
+          "enum": ["calendar", "rolling"],
+          "enumDescriptions": [
+            "Calendar week — costs since Sunday 00:00.",
+            "Rolling window — costs over the last 7 days (matches clusage)."
+          ],
+          "default": "calendar",
+          "description": "What the week card in the dashboard (and tooltip) measures."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run check && npm run test && node esbuild.mjs --production",
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "check": "tsc --noEmit",
+    "test": "vitest run",
+    "package": "vsce package --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.0.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.4.0",
+    "vitest": "^3.0.0"
+  }
+}
