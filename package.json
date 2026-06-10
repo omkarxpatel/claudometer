@@ -3,7 +3,7 @@
   "displayName": "Claudometer — Claude Code Usage Tracker",
   "description": "Local-first Claude Code usage tracking: cost, tokens, and live quota in your status bar and dashboard. No API keys, no accounts, no telemetry.",
   "version": "0.1.0",
-  "publisher": "omkar-patel",
+  "publisher": "OmkarPatel",
   "license": "MIT",
   "repository": {
     "type": "git",

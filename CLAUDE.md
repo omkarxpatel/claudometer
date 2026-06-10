@@ -98,9 +98,13 @@ node scripts/demo/shot.mjs    # needs: npm i -D playwright && npx playwright ins
 
 ## Publishing status
 
-- `publisher` ("omkar-patel") and `repository` URL in package.json are
-  PLACEHOLDERS — set real marketplace publisher id + GitHub repo before
-  `vsce publish`. Relative README images require the https repository field.
-- Still missing: 128×128 PNG icon (`icon` field), git init / first commit.
+- Marketplace publisher id: **OmkarPatel** (must match package.json `publisher`,
+  the README badge URL, and `vsce login`). Publishing is done by manual .vsix
+  upload at marketplace.visualstudio.com/manage (no Azure DevOps PAT set up).
+- `repository.url` in package.json must point at the real GitHub repo — the
+  marketplace resolves the relative README screenshots through it.
+- Releases: bump `version`, update CHANGELOG, `npm run package`
+  (runs check + tests + production build), upload the .vsix. The in-app
+  "What's new" toast keys off the version automatically.
 - Pricing table in core/pricing.ts is current as of June 2026; live fetch covers
   drift, but bump the bundled table when touching pricing anyway.

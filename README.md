@@ -1,6 +1,6 @@
 # Claudometer
 
-[![Version](https://img.shields.io/visual-studio-marketplace/v/omkar-patel.claudometer?label=version&color=D97757)](https://marketplace.visualstudio.com/items?itemName=omkar-patel.claudometer)
+[![Version](https://img.shields.io/visual-studio-marketplace/v/OmkarPatel.claudometer?label=version&color=D97757)](https://marketplace.visualstudio.com/items?itemName=OmkarPatel.claudometer)
 
 Track what Claude Code actually costs you, inside VS Code.
 
