@@ -1,5 +1,7 @@
 # Claudometer
 
+[![Version](https://img.shields.io/visual-studio-marketplace/v/omkar-patel.claudometer?label=version&color=D97757)](https://marketplace.visualstudio.com/items?itemName=omkar-patel.claudometer)
+
 Track what Claude Code actually costs you, inside VS Code.
 
 Claude Code writes a log of every session to `~/.claude`. Claudometer reads those logs and shows your spend, tokens, and live rate limits in the status bar and a dashboard. No API keys, no accounts, no telemetry.
