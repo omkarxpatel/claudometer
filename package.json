@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/omkar-patel/claudometer.git"
+    "url": "https://github.com/omkarxpatel/claudometer.git"
   },
   "engines": {
     "vscode": "^1.85.0"
