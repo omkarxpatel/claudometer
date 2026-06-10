@@ -1,10 +1,19 @@
+<div align="center">
+
+<img src="media/icon.png" width="128" height="128" alt="Claudometer icon"/>
+
 # Claudometer
 
-[![Version](https://img.shields.io/visual-studio-marketplace/v/OmkarPatel.claudometer?label=version&color=D97757)](https://marketplace.visualstudio.com/items?itemName=OmkarPatel.claudometer)
+**Track what Claude Code actually costs you — directly in VS Code.**
 
-Track what Claude Code actually costs you, inside VS Code.
+Cost, tokens, and live rate limits, read from the session logs already on your machine.
+No API keys, no accounts, no telemetry.
 
-Claude Code writes a log of every session to `~/.claude`. Claudometer reads those logs and shows your spend, tokens, and live rate limits in the status bar and a dashboard. No API keys, no accounts, no telemetry.
+[![Version](https://img.shields.io/badge/version-0.1.1-D97757)](https://marketplace.visualstudio.com/items?itemName=OmkarPatel.claudometer)
+[![VS Code](https://img.shields.io/badge/VS%20Code-1.85+-007ACC)](https://marketplace.visualstudio.com/items?itemName=OmkarPatel.claudometer)
+[![License](https://img.shields.io/badge/license-MIT-97CA00)](LICENSE)
+
+</div>
 
 ![Overview](media/screenshots/overview.png)
 
