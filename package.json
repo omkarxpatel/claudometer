@@ -200,6 +200,7 @@
     }
   },
   "scripts": {
+    "version": "node scripts/sync-version-badge.mjs && git add README.md",
     "vscode:prepublish": "npm run check && npm run test && node esbuild.mjs --production",
     "build": "node esbuild.mjs",
     "watch": "node esbuild.mjs --watch",

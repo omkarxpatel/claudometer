@@ -1,0 +1,29 @@
+name: Publish to Marketplace
+
+# Fires when a version tag is pushed (npm version creates these).
+# Requires the VSCE_PAT repository secret — an Azure DevOps personal access
+# token with Marketplace → Manage scope for the OmkarPatel publisher.
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      # vsce package runs vscode:prepublish → typecheck + tests + production build,
+      # so a red build can never reach the marketplace.
+      - run: npx vsce package
+      - run: npx vsce publish --packagePath claudometer-*.vsix -p "$VSCE_PAT"
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vsix
+          path: claudometer-*.vsix

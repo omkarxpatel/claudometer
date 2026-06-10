@@ -103,9 +103,11 @@ node scripts/demo/shot.mjs    # needs: npm i -D playwright && npx playwright ins
   upload at marketplace.visualstudio.com/manage (no Azure DevOps PAT set up).
 - `repository.url` in package.json must point at the real GitHub repo — the
   marketplace resolves the relative README screenshots through it.
-- Releases: bump `version` in package.json AND the static version badge at the
-  top of README.md (shields retired its dynamic marketplace badges), update
-  CHANGELOG, `npm run package` (runs check + tests + production build), upload
-  the .vsix. The in-app "What's new" toast keys off the version automatically.
+- Releases: update CHANGELOG, then `npm version patch` (bumps package.json,
+  syncs the static README badge via scripts/sync-version-badge.mjs, commits,
+  tags) and `git push --follow-tags`. The publish.yml workflow then packages
+  (check + tests + production build) and publishes — IF the `VSCE_PAT` repo
+  secret is set (needs the Azure DevOps org). Until then: `npm run package`
+  and upload the .vsix manually. "What's new" toast keys off the version.
 - Pricing table in core/pricing.ts is current as of June 2026; live fetch covers
   drift, but bump the bundled table when touching pricing anyway.
