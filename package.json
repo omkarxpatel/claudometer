@@ -2,7 +2,7 @@
   "name": "claudometer",
   "displayName": "Claudometer — Claude Code Usage Tracker",
   "description": "Local-first Claude Code usage tracking: cost, tokens, and live quota in your status bar and dashboard. No API keys, no accounts, no telemetry.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "publisher": "OmkarPatel",
   "license": "MIT",
   "repository": {
@@ -76,27 +76,39 @@
             "id": "openDashboard",
             "title": "Open the dashboard",
             "description": "Spend, live quota, activity charts, a contribution calendar, and per-project drill-downs — all from data already on your machine.\n[Open Dashboard](command:claudometer.openDashboard)",
-            "media": { "markdown": "media/walkthrough/dashboard.md" },
-            "completionEvents": ["onCommand:claudometer.openDashboard"]
+            "media": {
+              "markdown": "media/walkthrough/dashboard.md"
+            },
+            "completionEvents": [
+              "onCommand:claudometer.openDashboard"
+            ]
           },
           {
             "id": "quota",
             "title": "Watch your quota",
             "description": "The status bar shows your 5-hour and weekly limits live, forecasts when you'll max out, and can notify you when a window resets.",
-            "media": { "markdown": "media/walkthrough/quota.md" }
+            "media": {
+              "markdown": "media/walkthrough/quota.md"
+            }
           },
           {
             "id": "budget",
             "title": "Set a budget (optional)",
             "description": "A monthly budget adds a progress bar and alerts at 80% and 100%.\n[Open Claudometer Settings](command:claudometer.openSettings)",
-            "media": { "markdown": "media/walkthrough/budget.md" },
-            "completionEvents": ["onCommand:claudometer.openSettings"]
+            "media": {
+              "markdown": "media/walkthrough/budget.md"
+            },
+            "completionEvents": [
+              "onCommand:claudometer.openSettings"
+            ]
           },
           {
             "id": "privacy",
             "title": "Your data stays local",
             "description": "Everything is read from your machine and stays there. A durable ledger preserves history even after Claude Code prunes old transcripts — export it any time.\n[Export Usage Data](command:claudometer.exportData)",
-            "media": { "markdown": "media/walkthrough/privacy.md" }
+            "media": {
+              "markdown": "media/walkthrough/privacy.md"
+            }
           }
         ]
       }
@@ -121,11 +133,26 @@
           "additionalProperties": {
             "type": "object",
             "properties": {
-              "input": { "type": "number", "minimum": 0 },
-              "output": { "type": "number", "minimum": 0 },
-              "cacheRead": { "type": "number", "minimum": 0 },
-              "cacheWrite5m": { "type": "number", "minimum": 0 },
-              "cacheWrite1h": { "type": "number", "minimum": 0 }
+              "input": {
+                "type": "number",
+                "minimum": 0
+              },
+              "output": {
+                "type": "number",
+                "minimum": 0
+              },
+              "cacheRead": {
+                "type": "number",
+                "minimum": 0
+              },
+              "cacheWrite5m": {
+                "type": "number",
+                "minimum": 0
+              },
+              "cacheWrite1h": {
+                "type": "number",
+                "minimum": 0
+              }
             },
             "additionalProperties": false
           }
@@ -188,7 +215,10 @@
         },
         "claudometer.dashboard.weekMetric": {
           "type": "string",
-          "enum": ["calendar", "rolling"],
+          "enum": [
+            "calendar",
+            "rolling"
+          ],
           "enumDescriptions": [
             "Calendar week — costs since Sunday 00:00.",
             "Rolling window — costs over the last 7 days (matches clusage)."

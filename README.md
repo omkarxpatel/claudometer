@@ -9,7 +9,7 @@
 Cost, tokens, and live rate limits, read from the session logs already on your machine.
 No API keys, no accounts, no telemetry.
 
-[![Version](https://img.shields.io/badge/version-0.1.1-D97757)](https://marketplace.visualstudio.com/items?itemName=OmkarPatel.claudometer)
+[![Version](https://img.shields.io/badge/version-0.1.2-D97757)](https://marketplace.visualstudio.com/items?itemName=OmkarPatel.claudometer)
 [![VS Code](https://img.shields.io/badge/VS%20Code-1.85+-007ACC)](https://marketplace.visualstudio.com/items?itemName=OmkarPatel.claudometer)
 [![License](https://img.shields.io/badge/license-MIT-97CA00)](LICENSE)
 
